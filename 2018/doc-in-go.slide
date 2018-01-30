@@ -1,0 +1,303 @@
+Documentation in Go
+
+Mike Hughes
+Consultant, developer and gopher
+@Intermernet
+mike@mikehughes.info
+
+* Why Document Code?
+
+Good documentation can:
+
+- Help other developers to understand your code
+- Help your future self to understand your code
+
+* Documentation in Go
+
+Comments should be included for:
+
+- Package level documentation
+- All exported functions, methods, types, variables and constants
+- Any code that isn't easily understandable
+- Bugs, Todos, etc
+- Code attribution
+- Anywhere else you think it may be helpful
+
+* Package level documentation
+
+Should be in the main package file:
+
+.code doc-in-go/nodoc-examples/foo.go 1,2
+
+should be
+
+.code doc-in-go/doc-examples/foo.go 1,7
+
+Further documentation can be added into a file named *doc.go* This file should contain nothing but a package declaration and comments.
+
+[[https://github.com/gorilla/mux/blob/master/doc.go][Example file]] and [[https://godoc.org/github.com/gorilla/mux][generated documentation]]
+
+* Exported identifiers
+
+All exported identifiers should be documented
+
+.code doc-in-go/nodoc-examples/foo.go 7,9
+
+should be
+
+.code doc-in-go/doc-examples/foo.go 14,17
+
+Comments on exported identifiers should start with the name of the identifier.
+
+.code doc-in-go/doc-examples/foo.go 19,22
+
+* Confusing or Non-Obvious Code
+
+Any code that may confuse the reader should ideally be avoided, but if it can't be avoided, it should be documented.
+
+Comments can be above the code, inline, or a mixture of both.
+
+ var mask int = 810092048
+
+should be
+
+ // mask is a representation of the first 15 results in the standard "FizzBuzz" challenge.
+ var mask int = 810092048 // Binary representation: 11 00 00 01 00 10 01 00 00 01 10 00 01 00 00
+
+* Bugs, Todos etc.
+
+It's recommended to document bugs and todos and assign responsibility for them.
+
+e.g.
+
+ // True returns true
+ //
+ // BUG(mike): Should return true
+ func True() bool {
+     return false
+ }
+
+and
+
+ // Divide divides one number by another
+ //
+ // TODO(mike): Check divisor to prevent divide by zero
+ func Divide(a, b int) int {
+ 	return a / b
+ }
+
+More on this later
+
+* Documenting code attribution
+
+Any code taken from, or inspired by other code should be attributed with a comment:
+
+e.g.
+
+ // lock acquires an advisory lock on a file descriptor.
+ func (f *flock) lock(k *KeysFile, mode os.FileMode, exclusive bool, timeout time.Duration) error {
+ ...
+
+should be
+
+ // lock acquires an advisory lock on a file descriptor.
+ //
+ // Based on https://github.com/boltdb/bolt/blob/master/bolt_unix.go
+ // Copyright boltdb authors
+ func (f *flock) lock(k *KeysFile, mode os.FileMode, exclusive bool, timeout time.Duration) error {
+ ...
+
+* Other Documentation
+
+One of Go's primary objectives is to improve the development experience of large teams.
+
+More documentation is always better than less.
+
+If in doubt, add documentation!
+
+.image doc-in-go/img/gopherwithbooks.jpg
+
+* Documentation tooling
+
+- [[https://godoc.org/][https://godoc.org/]]
+- The `godoc` command
+- The `gddo` command
+- The `golint` command
+- Code examples
+
+* godoc.org
+
+The closest thing Go has to a central package repository
+
+Docs can be found at `https://godoc.org/path/to/repo` (e.g. [[https://godoc.org/github.com/gorilla/mux][https://godoc.org/github.com/gorilla/mux]] )
+
+[[https://godoc.org/?q=gui][Searchable]] 
+
+If you want your code to be discoverable, index it with godoc.org
+
+* The godoc command
+
+`godoc` provides documentation for packages that are locally installed.
+
+It runs in two different modes:
+
+- A command line utility
+
+- A web server
+
+* godoc on the command line
+
+To quickly print the documentation in a terminal for any locally installed package you can use `godoc` `PackageName`
+
+e.g.
+
+ godoc github.com/gorilla/mux
+
+To print the documentation for one or more exported identifiers use `godoc` `PackageName` `Identifier1` `Identifier2` `...`
+
+e.g.
+
+ godoc github.com/gorilla/mux Router
+
+or
+
+ godoc github.com/gorilla/mux Router WalkFunc
+
+* 
+
+`godoc` can also output in raw source code format with the `-src` switch
+
+ godoc -src github.com/gorilla/mux WalkFunc
+
+or in html format with the `-html` switch
+
+ godoc -html github.com/gorilla/mux WalkFunc
+
+* godoc as a local web server
+
+You can run godoc as a web server on your local machine by using the `-http` switch.
+
+ godoc -http=:6060
+
+It will, by default, serve documentation in your $GOROOT and $GOPATH
+
+Although this is useful, it becomes more powerful when you enable indexing for full text search.
+
+ godoc -http=:6060 -index
+
+You can create the index in advance, and save it to a file (This will take a few minutes):
+
+ godoc -write_index=true -index_files="godoc.idx"
+
+Then run `godoc` with the index enabled:
+
+ godoc -http=:6060 -index -index_files="godoc.idx"
+
+* Displaying custom note types in godoc
+
+By default `godoc` will display in it's "notes" section anything marked as a bug with the format
+
+ // BUG(person assigned): Description of bug
+
+Many people also choose to show Todos by invoking `godoc` with the command
+
+ godoc -http=:6060 -notes="BUG|TODO"
+
+You may want to show custom note types. There are strict format restrictions on note types:
+- The note type must be all capital letters (no numbers, lowercase letters, or other characters)
+- Followed immediately by parentheses containing at least one character
+- Followed immediately by a colon character
+- Followed by a description containing at least one character
+
+* Examples of custom note types
+
+Valid:
+
+ // MILESTONE(mike): v2.0 - Add Generics
+ // ISSUE(mike): Github issue #37
+
+Invalid:
+
+ // VERSION2(mike): Fix all the bugs
+ // TODO: Assign this todo to someone
+ // ISSUE(): Assign this issue to someone
+ // BUG(mike):
+ // Bug(mike): Capitalise all the things! 
+
+To show all valid note types in `godoc` run:
+
+  godoc -http=:6060 -notes=".*"
+
+* The gddo command
+
+`gddo` is the "go doc dot org" source. It can be used as a private godoc server for teams and companies.
+
+Documentation can be served from centralised sources, including private github repositories.
+
+More information can be found at [[https://github.com/golang/gddo][https://github.com/golang/gddo]]
+
+* The golint command
+
+`golint` is a linter for go code
+
+Among the many style checks it performs are some related to documentation and comments.
+
+It's a good idea to run it on your code and consider any suggestions it may make.
+
+It integrates with most common text editors.
+
+To get it run:
+
+ go get -u github.com/golang/lint/golint
+
+Example usage:
+
+ $ golint
+ foo.go:5:5: exported var ErrUnsupportedType should have comment or be unexported
+ foo.go:7:6: exported type Foo should have comment or be unexported
+ ...
+
+* Documenting with code examples
+
+Examples are one of the best ways to document your code.
+
+In Go examples are actually tests. They are run when you run `go` `test`.
+
+By convention, examples usually live in a file named `example_test.go`.
+
+The name must start with `Example` followed by the name of the function.
+
+.code doc-in-go/code-examples/example_test.go 7,9
+
+As examples are run as tests the documentation should always stay valid for the code.
+
+* Examples with output
+
+Code examples can include the expected output of the example by adding an `//` `Output:` comment directly after the line that produces the output.
+
+.code doc-in-go/code-examples/example_test.go 11,18
+
+If the output is incorrect then running `go` `test` on the package will fail:
+
+ --- FAIL: ExampleDecode_fail (0.00s)
+ got:
+ Hi #golangsyd
+ want:
+ Hi #golandsyd
+ FAIL
+ FAIL	github.com/Intermernet/doctalk/doc-in-go/code-examples	0.063s
+ Error: Tests failed.
+
+* Workshop
+
+Write a code example with or without output for a function in the standard library that has no example.
+
+* Links and further reading
+
+[[https://godoc.org/][https://godoc.org/]]
+[[https://blog.golang.org/godoc-documenting-go-code][https://blog.golang.org/godoc-documenting-go-code]]
+[[https://godoc.org/golang.org/x/tools/cmd/godoc][https://godoc.org/golang.org/x/tools/cmd/godoc]]
+[[https://github.com/golang/gddo][https://github.com/golang/gddo]]
+[[https://github.com/golang/lint][https://github.com/golang/lint]]
+[[https://blog.golang.org/examples][https://blog.golang.org/examples]]
+[[https://godoc.org/github.com/natefinch/godocgo][https://godoc.org/github.com/natefinch/godocgo]]
