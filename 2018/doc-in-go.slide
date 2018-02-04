@@ -55,14 +55,14 @@ Comments on exported identifiers should start with the name of the identifier.
 
 Any code that may confuse the reader should ideally be avoided, but if it can't be avoided, it should be documented.
 
+Confusing code: 
+.play doc-in-go/fizzbuzz/fizzbuzz.go 5,20
+
+* 
+Commented version ([[https://play.golang.org/p/kQqzJTCtvSV][https://play.golang.org/p/kQqzJTCtvSV]]):
+.play doc-in-go/fizzbuzz/fizzbuzz_commented.go 5,24
+
 Comments can be above the code, inline, or a mixture of both.
-
- var mask int = 810092048
-
-should be
-
- // mask is a representation of the first 15 results in the standard "FizzBuzz" challenge.
- var mask int = 810092048 // Binary representation: 11 00 00 01 00 10 01 00 00 01 10 00 01 00 00
 
 * Bugs, Todos etc.
 
