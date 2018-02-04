@@ -265,11 +265,29 @@ In Go examples are actually tests. They are run when you run `go` `test`.
 
 By convention, examples usually live in a file named `example_test.go`.
 
-The name must start with `Example` followed by the name of the function.
+The name must start with `Example` followed by the name of the function, or for method examples, in the form `Type_Method`.
 
 .code doc-in-go/code-examples/example_test.go 7,9
 
 As examples are run as tests the documentation should always stay valid for the code.
+
+* Method examples
+
+Examples for methods on types should begin with `Example`, followed by the type name, an underscore and the method name.
+
+The code:
+
+.code doc-in-go/c2f/c2f.go 3,7
+
+Has an example:
+
+.code doc-in-go/c2f/c2f_test.go 5,8
+
+* Package level examples
+
+Used to demonstrate the use of an entire package, not just one function.
+
+Example: [[https://godoc.org/github.com/gorilla/mux#example-package--AuthenticationMiddleware][https://godoc.org/github.com/gorilla/mux#example-package--AuthenticationMiddleware]]
 
 * Examples with output
 
@@ -292,7 +310,7 @@ If the output is incorrect then running `go` `test` on the package will fail:
 
 If the output from a test won't be in a known order you can use `//` `Unordered` `Ouput` instead.
 
-Unordered output can occur for a few reasons including map iterations and select statements on more than one channel.
+Unordered output can occur for a few reasons including map iterations and select statements on more than one channel, or from more than one goroutine.
 
 .code doc-in-go/code-examples/example_test.go 29,38
 
