@@ -29,7 +29,8 @@ func main() {
 		} else { // If c == 0 then just print the value of i
 			fmt.Println(i)
 		}
-		// Pop off the 2 right-most bits of mask and put the previous result of c back onto the left. This makes the 15 bit-pairs loop forever.
+		// Pop off the 2 right-most bits of mask and put the previous result of c back onto the left.
+		// This makes the 15 bit-pairs loop forever.
 		mask = mask>>2 | c<<28
 	}
 }
