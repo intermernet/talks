@@ -25,3 +25,15 @@ func ExampleDecode_fail() {
 	fmt.Printf("%s", out)
 	// Output: Hi #golandsyd
 }
+
+func ExampleUnordered() {
+	ints := []int{0, 1, 2, 3}
+	for _, i := range Unordered(ints) {
+		fmt.Println(i)
+	}
+	// Unordered output:
+	// 3
+	// 2
+	// 1
+	// 0
+}

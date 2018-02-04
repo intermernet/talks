@@ -288,9 +288,19 @@ If the output is incorrect then running `go` `test` on the package will fail:
  FAIL	github.com/Intermernet/doctalk/doc-in-go/code-examples	0.063s
  Error: Tests failed.
 
+* Unordered output
+
+If the output from a test won't be in a known order you can use `//` `Unordered` `Ouput` instead.
+
+Unordered output can occur for a few reasons including map iterations and select statements on more than one channel.
+
+.code doc-in-go/code-examples/example_test.go 29,38
+
 * Workshop
 
-Write a code example with or without output for a function in the standard library that has no example.
+Write an example, with or without output, for a function in the Go standard library, or your favourite open source Go package.
+
+[[https://github.com/Intermernet/listexamples][https://github.com/Intermernet/listexamples]]
 
 * Links and further reading
 
