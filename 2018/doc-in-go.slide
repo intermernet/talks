@@ -269,7 +269,13 @@ The name must start with `Example` followed by the name of the function, or for 
 
 .code doc-in-go/code-examples/example_test.go 7,9
 
-As examples are run as tests the documentation should always stay valid for the code.
+Because examples are run as tests the documentation should always stay valid for the code.
+
+* Sub examples
+
+You can have more than one example per function or method by adding an underscore and a string with no whitespace, and that does not start with a capital letter.
+
+.code doc-in-go/c2f/c2f_test.go 10,16
 
 * Method examples
 
@@ -277,7 +283,7 @@ Examples for methods on types should begin with `Example`, followed by the type 
 
 The code:
 
-.code doc-in-go/c2f/c2f.go 3,7
+.code doc-in-go/c2f/c2f.go 3,9
 
 Has an example:
 
@@ -293,7 +299,7 @@ Example: [[https://godoc.org/github.com/gorilla/mux#example-package--Authenticat
 
 Code examples can include the expected output of the example by adding an `//` `Output:` comment directly after the line that produces the output.
 
-.code doc-in-go/code-examples/example_test.go 11,18
+.code doc-in-go/code-examples/example_test.go 16,23
 
 If the output is incorrect then running `go` `test` on the package will fail:
 
@@ -312,13 +318,7 @@ If the output from a test won't be in a known order you can use `//` `Unordered`
 
 Unordered output can occur for a few reasons including map iterations and select statements on more than one channel, or from more than one goroutine.
 
-.code doc-in-go/code-examples/example_test.go 29,38
-
-* Workshop
-
-Write an example, with or without output, for a function in the Go standard library, or your favourite open source Go package.
-
-[[https://github.com/Intermernet/listexamples][https://github.com/Intermernet/listexamples]]
+.code doc-in-go/code-examples/example_test.go 34,44
 
 * Links and further reading
 
@@ -329,3 +329,20 @@ Write an example, with or without output, for a function in the Go standard libr
 [[https://github.com/golang/lint][https://github.com/golang/lint]]
 [[https://blog.golang.org/examples][https://blog.golang.org/examples]]
 [[https://godoc.org/github.com/natefinch/godocgo][https://godoc.org/github.com/natefinch/godocgo]]
+
+* Workshop
+
+Write an example, with or without output, for a function in your favourite open source Go package.
+
+Some suggestions:
+
+[[https://github.com/vardius/go-api-boilerplate][https://github.com/vardius/go-api-boilerplate]]
+[[https://github.com/vardius/gorouter][https://github.com/vardius/gorouter]]
+
+Utility to find examples in packages:
+
+[[https://github.com/Intermernet/listexamples][https://github.com/Intermernet/listexamples]]
+
+ go get github.com/Intermernet/listexamples
+ go install github.com/Intermernet/listexamples
+ listexamples package_name

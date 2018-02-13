@@ -8,6 +8,11 @@ func ExampleEncode() {
 	fmt.Println(Encode([]byte("Hi #golangsyd")))
 }
 
+func ExampleEncode_withOutput() {
+	fmt.Print(Encode([]byte("Hi #golangsyd")))
+	// Output: SGkgI2dvbGFuZ3N5ZA
+}
+
 func ExampleDecode() {
 	out, err := Decode("SGkgI2dvbGFuZ3N5ZA")
 	if err != nil {
