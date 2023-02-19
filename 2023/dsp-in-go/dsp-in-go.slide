@@ -1,0 +1,117 @@
+# Audio Digital Signal Processing
+Writing a pitch shifter in Go
+21 Feb 2023
+Tags: golang, dsp, pitch-shift
+Summary: An introduction to pitch-shifting and digital signal processing in Go.
+
+Mike Hughes
+Gopher, Amateur audio nerd
+mike@mikehughes.info
+https://github.com/intermernet/
+@intermernet
+
+## About me
+
+- Ex sys-admin / developer / security consultant
+- Now Industrial Rope Access and Height Safety
+- Audio and music fanatic
+- Part time consultant, recreational programmer
+
+## What is Digital Signal Proessing (DSP)?
+_" digital signals ... are a sequence of numbers that represent samples of a continuous variable in a domain such as time, space, or frequency"_
+
+ Examples of DSP use
+- Radar / Sonar etc.
+- Data compression
+- Video / Audio encoding and decoding
+- Seismology
+- Astronomy
+- Audio processing
+
+## DSP in the Audio world
+Used for
+- Audio encoding and decoding
+- Audio processing
+- Effects
+- Restoration
+
+Often uses "Fourier Transforms"
+
+## What is a Fourier Transform?
+- Jean-Baptiste Joseph Fourier (21 March 1768 – 16 May 1830)
+: French Revolution
+: Egypt with Napoleon Bonaparte 
+- _"On the Propagation of Heat in Solid Bodies" - 1807_
+- _"In mathematics, the Fourier transform (FT) is a transform that converts a function into a form that describes the frequencies present in the original function. The output of the transform is a complex-valued function of frequency."_ (https://en.wikipedia.org/wiki/Fourier_transform)
+- Partials
+- The Frequency, Magnitude and Time domains
+- Discrete Fourier Transforms (DFT)
+- Quadratic 𝒪 (𝑁²)
+
+## What is an FFT?
+- Loglinear 𝒪 (𝑁 ㏒ 𝑁)
+- Invented by James Cooley and John Tukey - 1965
+- Devised as a way to analyse vibrations to detect nuclear testing
+- Forunately not patented!
+- Other implementations:
+ - Prime-factor FFT algorithm, Bruun's FFT algorithm, Rader's FFT algorithm, Chirp Z-transform, and hexagonal fast Fourier transform probably many others
+
+## Pitch Shifting
+Normal methods
+- Phase Vocoder
+- TDHS / SOLA (Time-Domain Harmonic Scaling or Synchronized OverLap-Add)
+
+## Stephan Bernsee's method: (http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/)
+- Divide the waveform into small chunks
+- Apply FFT to each chunk
+- Track the phase difference and "bin" each partial
+- Apply the actual pitch shift
+- Adjust partials frequencies by compensating for phase difference
+- Apply Inverse FFT
+- Apply windowing to smooth the transitions of the chunks
+
+## Code and demonstration
+
+[https://github.com/intermernet/pitcher](pitcher)
+
+Invoke the demo gods!
+
+## Improvements, interesting bugs and known issues
+Framesize vs hardware buffer size
+- Currently using non-standard sample rate as a hack
+- Use bufio / bytes.buffer
+- Use buffered channels
+
+Quality decreases after pitch ratio changes
+- Needs investigation
+
+## Other Go DSP resources
+- https://github.com/mjibson/go-dsp
+- https://github.com/r9y9/gossp
+- https://github.com/200sc/klangsynthese
+
+## Go Audio resources
+- https://github.com/gen2brain/malgo (miniaudio bindings https://miniaud.io/)
+- https://github.com/gordonklaus/portaudio
+- https://github.com/hajimehoshi/oto
+- https://github.com/faiface/beep (Uses oto under the hood)
+
+## Credits and further reading
+Credits:
+- http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/
+- http://blogs.zynaptiq.com/bernsee/repo/smbPitchShift.cpp
+- https://github.com/200sc/klangsynthese/blob/master/audio/filter/pitchshift.go
+- https://github.com/gen2brain/malgo/tree/master/_examples
+- https://en.wikipedia.org/wiki/Digital_signal_processing
+
+Further Reading:
+- http://blogs.zynaptiq.com/bernsee/
+- https://en.wikipedia.org/wiki/Fast_Fourier_transform
+
+## Slides and code
+
+Slides: [https://go-talks.appspot.com/github.com/intermernet/talks/2023/dsp-in-go.slide](https://go-talks.appspot.com/github.com/intermernet/talks/2023/dsp-in-go.slide)
+
+Code: [github.com/intermernet/pitcher](github.com/intermernet/pitcher)
+
+## Questions?
