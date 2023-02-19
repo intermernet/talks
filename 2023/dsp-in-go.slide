@@ -1,0 +1,199 @@
+# Audio Digital Signal Processing
+Writing a pitch shifter in Go
+21 Feb 2023
+Tags: golang, dsp, pitch-shift
+Summary: An introduction to pitch-shifting and digital signal processing in Go.
+
+Mike Hughes
+Gopher, Amateur audio nerd
+mike@mikehughes.info
+https://github.com/intermernet/
+@intermernet
+
+* About me
+
+- Ex sys-admin / developer / security consultant
+- Gopher since 2013
+- Now working in Industrial Rope Access and Height Safety
+- Audio and music fanatic
+- Part time consultant, recreational programmer
+
+* Caveats
+
+.image resources/b7e.jpg
+
+I'm not an expert in DSP / mathematics in general
+
+My explanations may be overly simple, partly mistaken, or completely wrong
+
+_Use of any demonstrated code in production systems could result in data corruption, embarrassment, serious injury or death!_
+
+* What is Digital Signal Processing (DSP)?
+
+_" digital signals ... are a sequence of numbers that represent samples of a continuous variable in a domain such as time, space, or frequency"_ [https://en.wikipedia.org/wiki/Digital_signal_processing](https://en.wikipedia.org/wiki/Digital_signal_processing)
+
+ Examples of DSP use
+- Radar / Sonar etc.
+- Data compression
+- Video / Audio encoding and decoding
+- Seismology
+- Astronomy
+- Audio processing
+- Much more!
+
+* DSP in the Audio world
+
+Used for
+- Audio encoding and decoding
+- Audio processing
+- Effects
+- Restoration
+
+Often these processes rely on "Fourier Transforms"
+
+* What is a Fourier Transform?
+
+- Invented by Jean-Baptiste Joseph Fourier (21 March 1768 – 16 May 1830)
+: French Revolution
+: Egypt with Napoleon Bonaparte 
+- First presented in _"On the Propagation of Heat in Solid Bodies" - 1807_
+- _"In mathematics, the Fourier transform (FT) is a transform that converts a function into a form that describes the frequencies present in the original function. The output of the transform is a complex-valued function of frequency."_ [https://en.wikipedia.org/wiki/Fourier_transform](https://en.wikipedia.org/wiki/Fourier_transform)
+- Any waveform can be decomposed into a series of "Partials"
+- The Frequency, Magnitude and Time domains are inter-related. A signal with time and magnitude can be transformed into the time and frequency domains.
+- Fourier Transforms are "Inversable" to transform back to time and magnitude domains.
+- Discrete Fourier Transforms (DFT) are Fourier Transforms that operate on a finite, usually small section of a signal
+- Fourier Transforms are unfortunately slow to compute: Quadratic 𝒪 (𝑁²)
+
+3blue1brown video: _But what is the Fourier Transform? A visual introduction_
+[https://youtu.be/spUNpyF58BY](https://youtu.be/spUNpyF58BY)
+
+* Partials combine to make complex waveforms
+
+.image resources/squarewave.gif
+
+This example shows how adding simple sinusoids (represented by rotating vectors) can create complex waveforms. In this case, they approach a square wave.
+
+Credit [https://blog.matthen.com/post/42112703604/the-smooth-motion-of-rotating-circles-can-be-used](https://blog.matthen.com/post/42112703604/the-smooth-motion-of-rotating-circles-can-be-used)
+
+* Complex Example
+
+.image resources/sherlock.gif
+
+Credit: [https://github.com/peterbbryan/fourier-sketcher](https://github.com/peterbbryan/fourier-sketcher)
+
+* What is a Fast Fourier Transform (FFT)?
+
+FFTs are a form of DFT
+
+- As the name suggests, they are much faster! Loglinear 𝒪 (𝑁 ㏒ 𝑁)
+- Invented by James Cooley and John Tukey in 1965
+- Devised as a way to analyse vibrations to detect nuclear testing
+- Forunately not patent encumbered!
+- Other implementations: Prime-factor FFT algorithm, Bruun's FFT algorithm, Rader's FFT algorithm, Chirp Z-transform, hexagonal fast Fourier transform, Fastest Fourier Transform in the West (FFTW), probably many others
+
+* Aside: The Chipmunk Effect
+
+.image resources/chipmunks.jpg
+
+Changing the pitch of an audio signal can be done by simply changing the speed of the signal. This is equivalent to speeding up or slowing down an analogue tape or record.
+
+This is often referred to as the "Chipmunk Effect", but was used by many artists including The Beatles, Prince, David Bowie and was a staple in early techno and break-beat music.
+
+To avoid this correlation we must decouple the pitch and time domains of a signal, so FFTs are a logical tool to employ.
+
+* Pitch Shifting algorithms
+
+Changing the pitch of an audio signal without changing the speed (or vice-versa) can be done using a "pitch shifting" algorithm
+
+Normal methods
+- Phase Vocoder / OLA (OverLap and Add)
+- Sinusoidal spectral modeling
+- TDHS / SOLA (Time-Domain Harmonic Scaling or Synchronized OverLap-Add)
+- Frame-based / TSM (Time Scale Modification)
+- "Wavelet" transform methods
+- Hybrid and exotic methods (Zynaptiq ZTX, Zplane etc)
+
+For more details see [https://en.wikipedia.org/wiki/Audio_time_stretching_and_pitch_scaling](https://en.wikipedia.org/wiki/Audio_time_stretching_and_pitch_scaling)
+
+* Stephan Bernsee's method:
+
+[http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/](http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/)
+
+An educational algorithm somewhat based on a Phase Vocoder
+
+- Divide the waveform into small chunks
+- Apply FFT to each chunk
+- Track the phase difference and "bin" each partial
+- Apply the actual pitch shift
+- Adjust partials frequencies by compensating for phase difference
+- Apply Inverse FFT
+- Apply "windowing" to smooth the transitions of the chunks
+
+* Code and demonstration
+
+[https://github.com/intermernet/pitcher](pitcher)
+
+.image resources/demogods.jpg
+
+
+* What can this be used for?
+
+Some examples where pitch shifting is currently used include
+
+- Time shifting. An audio signal can be sped up / slowed down while maintaining pitch
+
+- Pitch detection: the fundamental frequency of an audio signal can be determined by analysing the results of the FFT
+
+- "Auto-tune" effects. By combining pitch detection and pitch shifting, an audio signal can be forced to conform to defined scale
+
+- Auto harmonising. An audio signal can be replicated at different pitches to create harmonies from a single input signal
+
+* Improvements, interesting bugs and known issues
+
+Framesize vs hardware buffer size causes glitching
+- Currently using non-standard sample rate as a hack
+
+Use bufio or bytes.buffer?
+
+Use buffered channels?
+
+Quality decreases after pitch ratio changes
+- Needs investigation
+
+Rewrite using another pitch shifting algorithm?
+
+Use more reliable 3rd party packages for FFT and windowing?
+
+* Other Go DSP resources
+
+- [https://github.com/mjibson/go-dsp](https://github.com/mjibson/go-dsp)
+- [https://github.com/r9y9/gossp](https://github.com/r9y9/gossp)
+- [https://github.com/200sc/klangsynthese](https://github.com/200sc/klangsynthese)
+
+* Go Audio resources
+- [https://github.com/gen2brain/malgo](https://github.com/gen2brain/malgo) (miniaudio bindings [https://miniaud.io/](https://miniaud.io/))
+- [https://github.com/gordonklaus/portaudio](https://github.com/gordonklaus/portaudio)
+- [https://github.com/hajimehoshi/oto](https://github.com/hajimehoshi/oto)
+- [https://github.com/faiface/beep](https://github.com/faiface/beep) (Uses Oto under the hood)
+
+* Credits and further reading
+
+Credits:
+- [http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/](http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/)
+- [http://blogs.zynaptiq.com/bernsee/repo/smbPitchShift.cpp](http://blogs.zynaptiq.com/bernsee/repo/smbPitchShift.cpp)
+- [https://github.com/200sc/klangsynthese/blob/master/audio/filter/pitchshift.go](https://github.com/200sc/klangsynthese/blob/master/audio/filter/pitchshift.go)
+- [https://github.com/gen2brain/malgo/tree/master/_examples](https://github.com/gen2brain/malgo/tree/master/_examples)
+- [https://en.wikipedia.org/wiki/Digital_signal_processing](https://en.wikipedia.org/wiki/Digital_signal_processing)
+
+Further Reading:
+- [http://blogs.zynaptiq.com/bernsee/](http://blogs.zynaptiq.com/bernsee/)
+- [https://en.wikipedia.org/wiki/Fast_Fourier_transform](https://en.wikipedia.org/wiki/Fast_Fourier_transform)
+- [https://en.wikipedia.org/wiki/Audio_time_stretching_and_pitch_scaling](https://en.wikipedia.org/wiki/Audio_time_stretching_and_pitch_scaling)
+
+* Slides and code
+
+Slides: [https://github.com/intermernet/talks/blob/master/2023/dsp-in-go/dsp-in-go.slide](https://github.com/intermernet/talks/blob/master/2023/dsp-in-go/dsp-in-go.slide)
+
+Code: [github.com/intermernet/pitcher](github.com/intermernet/pitcher)
+
+* Questions?
