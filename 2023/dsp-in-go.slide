@@ -53,11 +53,16 @@ Often these processes rely on "Fourier Transforms"
 
 ## What is a Fourier Transform?
 
+.image resources/joseph-fourier-portrait.jpg
+
 - Invented by Jean-Baptiste Joseph Fourier (21 March 1768 – 16 May 1830)
 : French Revolution
 : Egypt with Napoleon Bonaparte 
 - First presented in _"On the Propagation of Heat in Solid Bodies" - 1807_
 - _"In mathematics, the Fourier transform (FT) is a transform that converts a function into a form that describes the frequencies present in the original function. The output of the transform is a complex-valued function of frequency."_ [https://en.wikipedia.org/wiki/Fourier_transform](https://en.wikipedia.org/wiki/Fourier_transform)
+
+## Properties of Fourier Transforms
+
 - Any waveform can be decomposed into a series of "Partials"
 - The Frequency, Magnitude and Time domains are inter-related. A signal with time and magnitude can be transformed into the time and frequency domains.
 - Fourier Transforms are "Inversable" to transform back to time and magnitude domains.
@@ -97,6 +102,7 @@ FFTs are a form of DFT
 - Invented by James Cooley and John Tukey in 1965
 - Devised as a way to analyse vibrations to detect nuclear testing
 - Forunately not patent encumbered!
+- Has been described as "the most important numerical algorithm of our lifetime"
 - Other implementations: Prime-factor FFT algorithm, Bruun's FFT algorithm, Rader's FFT algorithm, Chirp Z-transform, hexagonal fast Fourier transform, Fastest Fourier Transform in the West (FFTW), probably many others
 
 ## Aside: The Chipmunk Effect
