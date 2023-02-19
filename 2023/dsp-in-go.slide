@@ -69,8 +69,7 @@ Often these processes rely on "Fourier Transforms"
 - Discrete Fourier Transforms (DFT) are Fourier Transforms that operate on a finite, usually small section of a signal
 - Fourier Transforms are unfortunately slow to compute: Quadratic 𝒪 (𝑁²)
 
-3blue1brown video: _But what is the Fourier Transform? A visual introduction_
-[https://youtu.be/spUNpyF58BY](https://youtu.be/spUNpyF58BY)
+[3blue1brown video: _But what is the Fourier Transform? A visual introduction_](https://youtu.be/spUNpyF58BY)
 
 ## Partials combine to make complex waveforms
 
@@ -102,7 +101,7 @@ FFTs are a form of DFT
 - Invented by James Cooley and John Tukey in 1965
 - Devised as a way to analyse vibrations to detect nuclear testing
 - Forunately not patent encumbered!
-- Has been described as "the most important numerical algorithm of our lifetime"
+- Has been described as "the most important numerical algorithm of our lifetime" ([Gilbert Strang - Wavelets](https://www.jstor.org/stable/29775194) )
 - Other implementations: Prime-factor FFT algorithm, Bruun's FFT algorithm, Rader's FFT algorithm, Chirp Z-transform, hexagonal fast Fourier transform, Fastest Fourier Transform in the West (FFTW), probably many others
 
 ## Aside: The Chipmunk Effect
@@ -206,7 +205,7 @@ Further Reading:
 
 ## Slides and code
 
-Slides: [https://github.com/intermernet/talks/blob/master/2023/dsp-in-go/dsp-in-go.slide](https://github.com/intermernet/talks/blob/master/2023/dsp-in-go/dsp-in-go.slide)
+Slides: [https://github.com/intermernet/talks/blob/master/2023/dsp-in-go.slide](https://github.com/intermernet/talks/blob/master/2023/dsp-in-go.slide)
 
 Code: [github.com/intermernet/pitcher](github.com/intermernet/pitcher)
 
