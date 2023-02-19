@@ -44,10 +44,10 @@ _" digital signals ... are a sequence of numbers that represent samples of a con
 ## DSP in the Audio world
 
 Used for
-- Audio encoding and decoding
-- Audio processing
-- Effects
-- Restoration
+- Audio encoding and decoding (MP3, FLAC etc)
+- Audio processing (Mixing, mastering etc)
+- Effects (Reverb, compression, pitch effects etc)
+- Restoration (Noise reduction etc)
 
 Often these processes rely on "Fourier Transforms"
 
