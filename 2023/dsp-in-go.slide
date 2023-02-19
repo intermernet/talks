@@ -83,7 +83,7 @@ Credit: [https://github.com/peterbbryan/fourier-sketcher](https://github.com/pet
 
 ## Spectrographs
 
-Once the FFT has been applied to a signal, it can be used to display a "Spectrograph" of the signal.
+Once the FFT has been applied to a signal, it can be used to calculate a "Spectrograph" of the signal.
 
 This shows the magnitude of partials near to defined frequencies. The separation of the frequency range into discrete frequency ranges is known as "binning".
 
