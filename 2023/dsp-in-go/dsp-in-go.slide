@@ -55,7 +55,7 @@ Often these processes rely on "Fourier Transforms"
 - Invented by Jean-Baptiste Joseph Fourier (21 March 1768 – 16 May 1830)
 : French Revolution
 : Egypt with Napoleon Bonaparte 
-- _First presented in "On the Propagation of Heat in Solid Bodies" - 1807_
+- First presented in _"On the Propagation of Heat in Solid Bodies" - 1807_
 - _"In mathematics, the Fourier transform (FT) is a transform that converts a function into a form that describes the frequencies present in the original function. The output of the transform is a complex-valued function of frequency."_ (https://en.wikipedia.org/wiki/Fourier_transform)
 - Any waveform can be decomposed into a series of "Partials"
 - The Frequency, Magnitude and Time domains are inter-related. A signal with time and magnitude can be transformed into the time and frequency domains.
