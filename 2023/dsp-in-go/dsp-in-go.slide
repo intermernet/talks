@@ -82,6 +82,8 @@ Credit: [https://github.com/peterbbryan/fourier-sketcher](https://github.com/pet
 
 ## What is a Fast Fourier Transform (FFT)?
 
+FFTs are a form of DFT
+
 - As the name suggests, they are much faster! Loglinear 𝒪 (𝑁 ㏒ 𝑁)
 - Invented by James Cooley and John Tukey in 1965
 - Devised as a way to analyse vibrations to detect nuclear testing
@@ -93,9 +95,14 @@ Credit: [https://github.com/peterbbryan/fourier-sketcher](https://github.com/pet
 Changing the pitch of an audio signal without changing the speed (or vice-versa) can be done using a "pitch shifting" algorithm
 
 Normal methods
-- Phase Vocoder
+- Phase Vocoder / OLA (OverLap and Add)
+- Sinusoidal spectral modeling
 - TDHS / SOLA (Time-Domain Harmonic Scaling or Synchronized OverLap-Add)
+- Frame-based / TSM (Time Scale Modification)
+- "Wavelet" transform methods
 - Hybrid and exotic methods (Zynaptiq ZTX, Zplane etc)
+
+For more details see [https://en.wikipedia.org/wiki/Audio_time_stretching_and_pitch_scaling](https://en.wikipedia.org/wiki/Audio_time_stretching_and_pitch_scaling)
 
 ## Stephan Bernsee's method:
 
@@ -121,15 +128,17 @@ An educational algorithm somewhat based on a Phase Vocoder
 
 Framesize vs hardware buffer size causes glitching
 - Currently using non-standard sample rate as a hack
-- Use bufio / bytes.buffer
-- Use buffered channels
+
+Use bufio or bytes.buffer?
+
+Use buffered channels?
 
 Quality decreases after pitch ratio changes
 - Needs investigation
 
-Use more reliable 3rd party packages for FFT and windowing?
-
 Rewrite using another pitch shifting algorithm?
+
+Use more reliable 3rd party packages for FFT and windowing?
 
 ## Other Go DSP resources
 
@@ -155,6 +164,7 @@ Credits:
 Further Reading:
 - http://blogs.zynaptiq.com/bernsee/
 - https://en.wikipedia.org/wiki/Fast_Fourier_transform
+- https://en.wikipedia.org/wiki/Audio_time_stretching_and_pitch_scaling
 
 ## Slides and code
 
