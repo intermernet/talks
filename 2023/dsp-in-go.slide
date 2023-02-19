@@ -121,13 +121,13 @@ For more details see [https://en.wikipedia.org/wiki/Audio_time_stretching_and_pi
 
 An educational algorithm somewhat based on a Phase Vocoder
 
-- Divide the waveform into small chunks
-- Apply FFT to each chunk
+- Divide the waveform into small "frames"
+- Apply FFT to each frame
 - Track the phase difference and "bin" each partial
 - Apply the actual pitch shift
 - Adjust partials frequencies by compensating for phase difference
 - Apply Inverse FFT
-- Apply "windowing" to smooth the transitions of the chunks
+- Apply "windowing" to smooth the transitions of the resulting frames
 
 ## Code and demonstration
 
