@@ -18,6 +18,16 @@ https://github.com/intermernet/
 - Audio and music fanatic
 - Part time consultant, recreational programmer
 
+## Caveats
+
+.image resources/b7e.jpg
+
+I'm not an expert in DSP / mathematics in general
+
+My explanations may be overly simple, partly mistaken, or completely wrong!
+
+_Use of any demonstrated code in production systems could result in data corruption, embarrassment, serious injury or death!_
+
 ## What is Digital Signal Proessing (DSP)?
 
 _" digital signals ... are a sequence of numbers that represent samples of a continuous variable in a domain such as time, space, or frequency"_
@@ -38,7 +48,7 @@ Used for
 - Effects
 - Restoration
 
-Often uses "Fourier Transforms"
+Often these processes rely on "Fourier Transforms"
 
 ## What is a Fourier Transform?
 
@@ -67,8 +77,7 @@ Credit: [https://github.com/peterbbryan/fourier-sketcher](https://github.com/pet
 - Invented by James Cooley and John Tukey - 1965
 - Devised as a way to analyse vibrations to detect nuclear testing
 - Forunately not patented!
-- Other implementations:
- - Prime-factor FFT algorithm, Bruun's FFT algorithm, Rader's FFT algorithm, Chirp Z-transform, and hexagonal fast Fourier transform probably many others
+- Other implementations: Prime-factor FFT algorithm, Bruun's FFT algorithm, Rader's FFT algorithm, Chirp Z-transform, hexagonal fast Fourier transform, Fastest Fourier Transform in the West (FFTW), probably many others
 
 ## Pitch Shifting
 
@@ -80,6 +89,9 @@ Normal methods
 ## Stephan Bernsee's method:
 
 [http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/](http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/)
+
+An educational algorithm somewhat based on a Phased Vocoder
+
 - Divide the waveform into small chunks
 - Apply FFT to each chunk
 - Track the phase difference and "bin" each partial
