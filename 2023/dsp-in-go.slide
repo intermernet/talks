@@ -140,13 +140,13 @@ An educational algorithm somewhat based on a Phase Vocoder
 
 Some examples where pitch shifting is currently used include
 
-- Time shifting. An audio signal can be sped up / slowed down while maintaining pitch
+- Time shifting: An audio signal can be sped up / slowed down while maintaining pitch
 
 - Pitch detection: the fundamental frequency of an audio signal can be determined by analysing the results of the FFT
 
-- "Auto-tune" effects. By combining pitch detection and pitch shifting, an audio signal can be forced to conform to defined scale
+- "Auto-tune" effects: By combining pitch detection and pitch shifting, an audio signal can be forced to conform to defined scale
 
-- Auto harmonising. An audio signal can be replicated at different pitches to create harmonies from a single input signal
+- Auto harmonising: An audio signal can be replicated at different pitches to create harmonies from a single input signal
 
 ## Improvements, interesting bugs and known issues
 
