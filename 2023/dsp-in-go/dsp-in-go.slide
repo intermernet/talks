@@ -28,7 +28,7 @@ My explanations may be overly simple, partly mistaken, or completely wrong!
 
 _Use of any demonstrated code in production systems could result in data corruption, embarrassment, serious injury or death!_
 
-## What is Digital Signal Proessing (DSP)?
+## What is Digital Signal Processing (DSP)?
 
 _" digital signals ... are a sequence of numbers that represent samples of a continuous variable in a domain such as time, space, or frequency"_
 
@@ -52,10 +52,10 @@ Often these processes rely on "Fourier Transforms"
 
 ## What is a Fourier Transform?
 
-- Jean-Baptiste Joseph Fourier (21 March 1768 – 16 May 1830)
+- Invented by Jean-Baptiste Joseph Fourier (21 March 1768 – 16 May 1830)
 : French Revolution
 : Egypt with Napoleon Bonaparte 
-- _"On the Propagation of Heat in Solid Bodies" - 1807_
+- _First presented in "On the Propagation of Heat in Solid Bodies" - 1807_
 - _"In mathematics, the Fourier transform (FT) is a transform that converts a function into a form that describes the frequencies present in the original function. The output of the transform is a complex-valued function of frequency."_ (https://en.wikipedia.org/wiki/Fourier_transform)
 - Any waveform can be decomposed into a series of "Partials"
 - The Frequency, Magnitude and Time domains are inter-related. A signal with time and magnitude can be transformed into the time and frequency domains.
