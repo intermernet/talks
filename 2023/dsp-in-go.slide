@@ -81,6 +81,14 @@ Credit [https://blog.matthen.com/post/42112703604/the-smooth-motion-of-rotating-
 
 Credit: [https://github.com/peterbbryan/fourier-sketcher](https://github.com/peterbbryan/fourier-sketcher)
 
+## Spectrographs
+
+Once the FFT has been applied to a signal, it can be used to display a "Spectrograph" of the signal.
+
+This shows the magnitude of partials near to defined frequencies. The separation of the frequency range into discrete frequency ranges is known as "binning".
+
+.image resources/audiospectrum.gif
+
 ## What is a Fast Fourier Transform (FFT)?
 
 FFTs are a form of DFT
