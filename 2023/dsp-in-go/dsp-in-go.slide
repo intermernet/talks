@@ -24,7 +24,7 @@ https://github.com/intermernet/
 
 I'm not an expert in DSP / mathematics in general
 
-My explanations may be overly simple, partly mistaken, or completely wrong!
+My explanations may be overly simple, partly mistaken, or completely wrong
 
 _Use of any demonstrated code in production systems could result in data corruption, embarrassment, serious injury or death!_
 
@@ -91,7 +91,17 @@ FFTs are a form of DFT
 - Forunately not patent encumbered!
 - Other implementations: Prime-factor FFT algorithm, Bruun's FFT algorithm, Rader's FFT algorithm, Chirp Z-transform, hexagonal fast Fourier transform, Fastest Fourier Transform in the West (FFTW), probably many others
 
-## Pitch Shifting
+## Aside: The Chipmunk Effect
+
+.image resources/chipmunks.jpg
+
+Changing the pitch of an audio signal can be done by simply changing the speed of the signal. This is equivalent to speeding up or slowing down an analogue tape or record.
+
+This is often referred to as the "Chipmunk Effect", but was used by many artists including The Beatles, Prince, David Bowie and was a staple in early techno and break-beat music.
+
+To avoid this correlation we must decouple the pitch and time domains of a signal, so FFTs are a logical tool to employ.
+
+## Pitch Shifting algorithms
 
 Changing the pitch of an audio signal without changing the speed (or vice-versa) can be done using a "pitch shifting" algorithm
 
@@ -124,6 +134,19 @@ An educational algorithm somewhat based on a Phase Vocoder
 [https://github.com/intermernet/pitcher](pitcher)
 
 .image resources/demogods.jpg
+
+
+## What can this be used for?
+
+Some examples where pitch shifting is currently used include
+
+- Time shifting. An audio signal can be sped up / slowed down while maintaining pitch
+
+- Pitch detection: the fundamental frequency of an audio signal can be determined by analysing the results of the FFT
+
+- "Auto-tune" effects. By combining pitch detection and pitch shifting, an audio signal can be forced to conform to defined scale
+
+- Auto harmonising. An audio signal can be replicated at different pitches to create harmonies from a single input signal
 
 ## Improvements, interesting bugs and known issues
 
