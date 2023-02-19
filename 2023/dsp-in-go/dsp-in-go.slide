@@ -13,11 +13,13 @@ https://github.com/intermernet/
 ## About me
 
 - Ex sys-admin / developer / security consultant
+- Gopher since 2013
 - Now Industrial Rope Access and Height Safety
 - Audio and music fanatic
 - Part time consultant, recreational programmer
 
 ## What is Digital Signal Proessing (DSP)?
+
 _" digital signals ... are a sequence of numbers that represent samples of a continuous variable in a domain such as time, space, or frequency"_
 
  Examples of DSP use
@@ -29,6 +31,7 @@ _" digital signals ... are a sequence of numbers that represent samples of a con
 - Audio processing
 
 ## DSP in the Audio world
+
 Used for
 - Audio encoding and decoding
 - Audio processing
@@ -38,6 +41,7 @@ Used for
 Often uses "Fourier Transforms"
 
 ## What is a Fourier Transform?
+
 - Jean-Baptiste Joseph Fourier (21 March 1768 – 16 May 1830)
 : French Revolution
 : Egypt with Napoleon Bonaparte 
@@ -48,7 +52,17 @@ Often uses "Fourier Transforms"
 - Discrete Fourier Transforms (DFT)
 - Quadratic 𝒪 (𝑁²)
 
+3blue1brown video: _But what is the Fourier Transform? A visual introduction_
+[https://youtu.be/spUNpyF58BY](https://youtu.be/spUNpyF58BY)
+
+## Example
+
+.image resources/sherlock.gif
+
+Credit: [https://github.com/peterbbryan/fourier-sketcher](https://github.com/peterbbryan/fourier-sketcher)
+
 ## What is an FFT?
+
 - Loglinear 𝒪 (𝑁 ㏒ 𝑁)
 - Invented by James Cooley and John Tukey - 1965
 - Devised as a way to analyse vibrations to detect nuclear testing
@@ -57,11 +71,15 @@ Often uses "Fourier Transforms"
  - Prime-factor FFT algorithm, Bruun's FFT algorithm, Rader's FFT algorithm, Chirp Z-transform, and hexagonal fast Fourier transform probably many others
 
 ## Pitch Shifting
+
 Normal methods
 - Phase Vocoder
 - TDHS / SOLA (Time-Domain Harmonic Scaling or Synchronized OverLap-Add)
+- Hybrid and exotic methods (Zynaptiq ZTX, Zplane etc)
 
-## Stephan Bernsee's method: (http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/)
+## Stephan Bernsee's method:
+
+[http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/](http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/)
 - Divide the waveform into small chunks
 - Apply FFT to each chunk
 - Track the phase difference and "bin" each partial
@@ -77,7 +95,8 @@ Normal methods
 Invoke the demo gods!
 
 ## Improvements, interesting bugs and known issues
-Framesize vs hardware buffer size
+
+Framesize vs hardware buffer size causes glitching
 - Currently using non-standard sample rate as a hack
 - Use bufio / bytes.buffer
 - Use buffered channels
@@ -85,7 +104,12 @@ Framesize vs hardware buffer size
 Quality decreases after pitch ratio changes
 - Needs investigation
 
+Use more reliable 3rd party packages for FFT and windowing?
+
+Rewrite using another pitch shifting algorithm?
+
 ## Other Go DSP resources
+
 - https://github.com/mjibson/go-dsp
 - https://github.com/r9y9/gossp
 - https://github.com/200sc/klangsynthese
@@ -97,6 +121,7 @@ Quality decreases after pitch ratio changes
 - https://github.com/faiface/beep (Uses oto under the hood)
 
 ## Credits and further reading
+
 Credits:
 - http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/
 - http://blogs.zynaptiq.com/bernsee/repo/smbPitchShift.cpp
