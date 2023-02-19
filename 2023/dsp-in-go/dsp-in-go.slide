@@ -81,6 +81,8 @@ Credit: [https://github.com/peterbbryan/fourier-sketcher](https://github.com/pet
 
 ## Pitch Shifting
 
+Changing the pitch of an audio signal without changing the speed (or vice-versa) can be done using a "pitch shifting" algorithm
+
 Normal methods
 - Phase Vocoder
 - TDHS / SOLA (Time-Domain Harmonic Scaling or Synchronized OverLap-Add)
