@@ -80,9 +80,9 @@ Credit [https://blog.matthen.com/post/42112703604/the-smooth-motion-of-rotating-
 
 Credit: [https://github.com/peterbbryan/fourier-sketcher](https://github.com/peterbbryan/fourier-sketcher)
 
-## What is an FFT?
+## What is a Fast Fourier Transform (FFT)?
 
-- Much faster! Loglinear 𝒪 (𝑁 ㏒ 𝑁)
+- As the name suggests, they are much faster! Loglinear 𝒪 (𝑁 ㏒ 𝑁)
 - Invented by James Cooley and John Tukey in 1965
 - Devised as a way to analyse vibrations to detect nuclear testing
 - Forunately not patent encumbered!
