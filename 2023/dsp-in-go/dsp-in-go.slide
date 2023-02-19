@@ -30,7 +30,7 @@ _Use of any demonstrated code in production systems could result in data corrupt
 
 ## What is Digital Signal Processing (DSP)?
 
-_" digital signals ... are a sequence of numbers that represent samples of a continuous variable in a domain such as time, space, or frequency"_
+_" digital signals ... are a sequence of numbers that represent samples of a continuous variable in a domain such as time, space, or frequency"_ [https://en.wikipedia.org/wiki/Digital_signal_processing](https://en.wikipedia.org/wiki/Digital_signal_processing)
 
  Examples of DSP use
 - Radar / Sonar etc.
@@ -39,6 +39,7 @@ _" digital signals ... are a sequence of numbers that represent samples of a con
 - Seismology
 - Astronomy
 - Audio processing
+- Much more!
 
 ## DSP in the Audio world
 
@@ -56,7 +57,7 @@ Often these processes rely on "Fourier Transforms"
 : French Revolution
 : Egypt with Napoleon Bonaparte 
 - First presented in _"On the Propagation of Heat in Solid Bodies" - 1807_
-- _"In mathematics, the Fourier transform (FT) is a transform that converts a function into a form that describes the frequencies present in the original function. The output of the transform is a complex-valued function of frequency."_ (https://en.wikipedia.org/wiki/Fourier_transform)
+- _"In mathematics, the Fourier transform (FT) is a transform that converts a function into a form that describes the frequencies present in the original function. The output of the transform is a complex-valued function of frequency."_ [https://en.wikipedia.org/wiki/Fourier_transform](https://en.wikipedia.org/wiki/Fourier_transform)
 - Any waveform can be decomposed into a series of "Partials"
 - The Frequency, Magnitude and Time domains are inter-related. A signal with time and magnitude can be transformed into the time and frequency domains.
 - Fourier Transforms are "Inversable" to transform back to time and magnitude domains.
@@ -142,29 +143,29 @@ Use more reliable 3rd party packages for FFT and windowing?
 
 ## Other Go DSP resources
 
-- https://github.com/mjibson/go-dsp
-- https://github.com/r9y9/gossp
-- https://github.com/200sc/klangsynthese
+- [https://github.com/mjibson/go-dsp](https://github.com/mjibson/go-dsp)
+- [https://github.com/r9y9/gossp](https://github.com/r9y9/gossp)
+- [https://github.com/200sc/klangsynthese](https://github.com/200sc/klangsynthese)
 
 ## Go Audio resources
-- https://github.com/gen2brain/malgo (miniaudio bindings https://miniaud.io/)
-- https://github.com/gordonklaus/portaudio
-- https://github.com/hajimehoshi/oto
-- https://github.com/faiface/beep (Uses oto under the hood)
+- [https://github.com/gen2brain/malgo](https://github.com/gen2brain/malgo) (miniaudio bindings [https://miniaud.io/](https://miniaud.io/))
+- [https://github.com/gordonklaus/portaudio](https://github.com/gordonklaus/portaudio)
+- [https://github.com/hajimehoshi/oto](https://github.com/hajimehoshi/oto)
+- [https://github.com/faiface/beep](https://github.com/faiface/beep) (Uses Oto under the hood)
 
 ## Credits and further reading
 
 Credits:
-- http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/
-- http://blogs.zynaptiq.com/bernsee/repo/smbPitchShift.cpp
-- https://github.com/200sc/klangsynthese/blob/master/audio/filter/pitchshift.go
-- https://github.com/gen2brain/malgo/tree/master/_examples
-- https://en.wikipedia.org/wiki/Digital_signal_processing
+- [http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/](http://blogs.zynaptiq.com/bernsee/pitch-shifting-using-the-ft/)
+- [http://blogs.zynaptiq.com/bernsee/repo/smbPitchShift.cpp](http://blogs.zynaptiq.com/bernsee/repo/smbPitchShift.cpp)
+- [https://github.com/200sc/klangsynthese/blob/master/audio/filter/pitchshift.go](https://github.com/200sc/klangsynthese/blob/master/audio/filter/pitchshift.go)
+- [https://github.com/gen2brain/malgo/tree/master/_examples](https://github.com/gen2brain/malgo/tree/master/_examples)
+- [https://en.wikipedia.org/wiki/Digital_signal_processing](https://en.wikipedia.org/wiki/Digital_signal_processing)
 
 Further Reading:
-- http://blogs.zynaptiq.com/bernsee/
-- https://en.wikipedia.org/wiki/Fast_Fourier_transform
-- https://en.wikipedia.org/wiki/Audio_time_stretching_and_pitch_scaling
+- [http://blogs.zynaptiq.com/bernsee/](http://blogs.zynaptiq.com/bernsee/)
+- [https://en.wikipedia.org/wiki/Fast_Fourier_transform](https://en.wikipedia.org/wiki/Fast_Fourier_transform)
+- [https://en.wikipedia.org/wiki/Audio_time_stretching_and_pitch_scaling](https://en.wikipedia.org/wiki/Audio_time_stretching_and_pitch_scaling)
 
 ## Slides and code
 
