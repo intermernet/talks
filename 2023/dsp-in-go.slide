@@ -164,9 +164,7 @@ Some examples where pitch shifting is currently used include
 ## Improvements, interesting bugs and known issues
 
 Framesize vs hardware buffer size causes glitching
-- Currently using non-standard sample rate as a hack
-
-Use bufio or bytes.buffer?
+- Currently using bytes.Buffers
 
 Use buffered channels?
 
