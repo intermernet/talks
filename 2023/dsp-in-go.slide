@@ -164,16 +164,17 @@ Some examples where pitch shifting is currently used include
 ## Improvements, interesting bugs and known issues
 
 Framesize vs hardware buffer size causes glitching
-- Currently using bytes.Buffers
+- Currently using bytes.Buffers for hardware I/O
+- Use buffered channels?
 
-Use buffered channels?
+Concurrency is flakey!
+- Needs investigation
+- Sometimes the program doesn't close cleanly. Seems to be due to an occasional delay in killing the audio callback function
 
 Quality decreases after pitch ratio changes
 - Needs investigation
-
-Rewrite using another pitch shifting algorithm?
-
-Use more reliable 3rd party packages for FFT and windowing?
+- Rewrite using another pitch shifting algorithm?
+- Use more reliable 3rd party packages for FFT and windowing?
 
 ## Other Go DSP resources
 
