@@ -1,0 +1,181 @@
+# Sense and Sensibility
+
+Writing a Hardware Sensor Driver for TinyGo
+20 Nov 2025
+Tags: golang, tinygo, hardware, sensor
+Summary: An introduction to adding support to TinyGo for a currently unsupported hardware sensor.
+
+Mike Hughes
+Gopher, Amateur Embedded Systems Nerd
+mike@mikehughes.info
+[https://github.com/intermernet/](https://github.com/intermernet/)
+@intermernet
+
+## About me
+
+- Ex sys-admin / developer / security consultant
+- Gopher since 2013
+- TinyGopher since 2024
+- Electronics hobbyist
+- Part time consultant, recreational programmer
+
+## Caveats
+
+_Standard Disclaimer:_
+
+I'm new to this stuff
+
+My explanations may be overly simple, partly mistaken, or completely wrong
+
+_Use of any demonstrated code in production systems could result in data corruption, embarrassment, serious injury or death!_
+
+## TinyGo, Microcontrollers and Sensors:
+
+TinyGo "A Go Compiler For Small Places"
+ - Designed for embedded systems with low memory, processing and power constraints
+ - Now also targeting WASM
+
+Microcontrollers
+ - Small computers on single IC
+ - Used in embedded systems
+
+Sensors
+ - Used to gather data from the surrounding environment
+ - Usually communicate over I²C (Inter-Integrated Circuit), SPI (Serial Peripheral Interface), GPIO, UART, ADC or other custom protocols
+
+## The Hardware
+
+Adafruit Metro RP2350
+ - RP2350 32-bit dual-core microcontroller (ARM and RISC-V)
+ - Simple flashing
+ - Lots of I/O
+ - US$28
+
+Adafruit 9-DOF Orientation IMU Fusion Breakout - BNO085
+ - CEVA BNO085 chip (Bosch BNO055 but runs completely different firmware)
+ - "integrates a triaxial accelerometer, triaxial gyroscope, magnetometer and a 32-bit ARM® Cortex™-M0+ microcontroller"
+ - Can communicate on I²C, SPI, UART
+ - Uses custom protocol (SH-2) and transport (SHTP)
+- US$25
+
+## BNO085 capabilities
+
+Motion Outputs: Acceleration, Angular Velocity, Magnetometer
+
+Orientation Outputs: Geomagnetic Rotation Vector, Game Rotation Vector, AR/VR Stabilized Game Rotation vector, Rotation Vector, AR/VR Stabilized Rotation Vector, Gyro rotation Vector, Gyro rotation Vector Prediction
+
+Classification System: Stability Detection and Classification, Tap Detector, Step Detector, Step Counter, Activity Classification, Significant Motion Detector, Shake Detector
+
+## Existing BNO085 software
+
+All provided by Adafruit
+
+Arduino BNO085 library [https://github.com/adafruit/Adafruit_BNO08x](https://github.com/adafruit/Adafruit_BNO08x)
+ - Written in C/C++
+
+CircuitPython BNO085 library [https://github.com/adafruit/Adafruit_CircuitPython_BNO08x](https://github.com/adafruit/Adafruit_CircuitPython_BNO08x)
+ - Written in Python
+
+## CEVA SH-2 and SHTP
+
+"Sensor Hub" protocol invented by Hillcrest Labs to communicate motion and environmental sensor data
+
+SH-2
+ - "connects to various motion and environmental sensors, collects data from them, processes that data and provides the results to a host processor."
+ - [https://www.ceva-ip.com/wp-content/uploads/SH-2-Reference-Manual.pdf](https://www.ceva-ip.com/wp-content/uploads/SH-2-Reference-Manual.pdf)
+
+SHTP
+ - "Sensor Hub Transport Protocol" used to communicate with the host
+ - Channel based architecture
+ - [https://www.ceva-ip.com/wp-content/uploads/SH-2-SHTP-Reference-Manual.pdf](https://www.ceva-ip.com/wp-content/uploads/SH-2-SHTP-Reference-Manual.pdf)
+
+## Coding in TinyGo
+
+ - Similar to Arduino, typically setup the hardware then process in the main loop
+ - "machine" package provides hardware abstractions for I/O
+ - `tinygo` command similar to "big" `go` command, but also provides "flashing" and "monitoring"
+ - TinyGo is mostly compatible with "big" Go but has caveats and limitations (CGo, Reflection, Maps etc)
+ - See [https://tinygo.org/docs/reference/lang-support/](https://tinygo.org/docs/reference/lang-support/) for details
+
+## Drivers in TinyGo
+
+ - [https://github.com/tinygo-org/drivers](https://github.com/tinygo-org/drivers)
+ - Driver design document: [https://tinygo.org/docs/guides/driver-design/](https://tinygo.org/docs/guides/driver-design/)
+ - Avoid floating point operations, avoid heap allocation, Concurrency
+
+## Example use of sensor driver
+
+.code resources/simple-driver.go 1,22
+
+## Writing a new driver
+
+ - Port from existing work (Arduino driver in this case)
+ - Read the specs / datasheets!
+ - Drink coffee
+ - Re-read the specs / datasheets
+ - Bash head against wall
+ - Write simple diagnostics
+ - Fix memory leaks, avoid heap allocation
+ - Correspond with TinyGo team for feedback
+
+## Memory management
+.code resources/sh2.go 1,14
+.code resources/shtp.go 1,8
+
+## Timing, delays, and hardware uncertainty
+
+ - Hardware is not software
+ - Lots of checks, double-checks, waiting, re-trying, confirming
+ - Many time periods are determined experimentally
+ - Hardware differs in features and capabilities (memory, bandwidth, speed)
+ - Read the datasheets and consult existing code!
+
+## Using the driver
+.code resources/simple_demo.go 9,9
+
+.code resources/simple_demo.go 15,18
+
+.code resources/simple_demo.go 27,28
+
+.code resources/simple_demo.go 38
+
+.code resources/simple_demo.go 52,56
+
+## Demo Time!
+
+[https://github.com/tinygo-org/drivers/pull/809](https://github.com/tinygo-org/drivers/pull/809)
+
+## Improvements, bugs and known issues
+Currently only supports I²C
+ - Sensor supports SPI and UART
+ - SPI probably required for higher bandwidth
+
+A few sensor reports aren't working
+ - Some don't work in the original Arduino code
+ - Needs investigation
+
+Not all features supported
+ - "Flash Record System"
+ - Calibration
+
+SH-2 / SHTP protocol in separate package
+ - Very few sensors use it, so maybe not important?
+
+## References and further reading
+
+ - Driver Design for TinyGo: [https://tinygo.org/docs/guides/driver-design](https://tinygo.org/docs/guides/driver-design)
+ - BNO08x Datasheet: [https://www.ceva-ip.com/wp-content/uploads/BNO080_085-Datasheet.pdf](https://www.ceva-ip.com/wp-content/uploads/BNO080_08)
+ - SH-2 Reference Manual: [https://www.ceva-ip.com/wp-content/uploads/SH-2-Reference-Manual.pdf](https://www.ceva-ip.com/wp-content/uploads/SH-2-Reference-Manual.pdf)
+ - SHTP Reference Manual: [https://www.ceva-ip.com/wp-content/uploads/SH-2-SHTP-Reference-Manual.pdf](https://www.ceva-ip.com/wp-content/uploads/SH-2-SHTP-Reference-Manual.pdf)
+ - Adafruit BNO085 library: [https://github.com/adafruit/Adafruit_BNO08x](https://github.com/adafruit/Adafruit_BNO08x)
+
+
+## Slides and code
+
+Slides: [https://github.com/intermernet/talks/blob/master/2025/tinygo-driver.slide](https://github.com/intermernet/talks/blob/master/2025/tinygo-driver.slide)
+
+Code: [https://github.com/intermernet/bno08xPrograms](https://github.com/intermernet/bno08xPrograms)
+
+PR: [https://github.com/tinygo-org/drivers/pull/809](https://github.com/tinygo-org/drivers/pull/809)
+
+## Questions?
