@@ -1,6 +1,6 @@
 # Audio Digital Signal Processing
 Writing a pitch shifter in Go
-21 Feb 2023
+23 Feb 2023
 Tags: golang, dsp, pitch-shift
 Summary: An introduction to pitch-shifting and digital signal processing in Go.
 
