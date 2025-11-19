@@ -44,13 +44,13 @@ Sensors
 
 ## The Hardware
 
-Adafruit Metro RP2350
+[Adafruit Metro RP2350](https://www.adafruit.com/product/6267)
  - RP2350 32-bit dual-core microcontroller (ARM and RISC-V)
  - Simple flashing
  - Lots of I/O
  - US$28
 
-Adafruit 9-DOF Orientation IMU Fusion Breakout - BNO085
+[Adafruit 9-DOF Orientation IMU Fusion Breakout - BNO085](https://www.adafruit.com/product/4754)
  - CEVA BNO085 chip (Bosch BNO055 but runs completely different firmware)
  - "integrates a triaxial accelerometer, triaxial gyroscope, magnetometer and a 32-bit ARM® Cortex™-M0+ microcontroller"
  - Can communicate on I²C, SPI, UART
@@ -61,19 +61,9 @@ Adafruit 9-DOF Orientation IMU Fusion Breakout - BNO085
 
 Motion Outputs: Acceleration, Angular Velocity, Magnetometer
 
-Orientation Outputs: Geomagnetic Rotation Vector, Game Rotation Vector, AR/VR Stabilized Game Rotation vector, Rotation Vector, AR/VR Stabilized Rotation Vector, Gyro rotation Vector, Gyro rotation Vector Prediction
+Orientation Outputs: Geomagnetic Rotation Vector, Game Rotation Vector, AR/VR Stabilized Game Rotation vector, Rotation Vector, AR/VR Stabilized Rotation Vector, Gyro Rotation Vector, Gyro Rotation Vector Prediction
 
 Classification System: Stability Detection and Classification, Tap Detector, Step Detector, Step Counter, Activity Classification, Significant Motion Detector, Shake Detector
-
-## Existing BNO085 software
-
-All provided by Adafruit
-
-Arduino BNO085 library [https://github.com/adafruit/Adafruit_BNO08x](https://github.com/adafruit/Adafruit_BNO08x)
- - Written in C/C++
-
-CircuitPython BNO085 library [https://github.com/adafruit/Adafruit_CircuitPython_BNO08x](https://github.com/adafruit/Adafruit_CircuitPython_BNO08x)
- - Written in Python
 
 ## CEVA SH-2 and SHTP
 
@@ -88,6 +78,10 @@ SHTP
  - Channel based architecture
  - [https://www.ceva-ip.com/wp-content/uploads/SH-2-SHTP-Reference-Manual.pdf](https://www.ceva-ip.com/wp-content/uploads/SH-2-SHTP-Reference-Manual.pdf)
 
+## Data Flow
+
+.image resources/dataflow.png _ 300
+
 ## Coding in TinyGo
 
  - Similar to Arduino, typically setup the hardware then process in the main loop
@@ -100,15 +94,26 @@ SHTP
 
  - [https://github.com/tinygo-org/drivers](https://github.com/tinygo-org/drivers)
  - Driver design document: [https://tinygo.org/docs/guides/driver-design/](https://tinygo.org/docs/guides/driver-design/)
- - Avoid floating point operations, avoid heap allocation, concurrency
+ - Avoid floating point operations, avoid heap allocation, avoid concurrency
 
 ## Example use of sensor driver
 
 .code resources/simple-driver.go 1,22
 
+## Existing BNO085 software
+
+Adafruit Arduino BNO085 library [https://github.com/adafruit/Adafruit_BNO08x](https://github.com/adafruit/Adafruit_BNO08x)
+ - Written in C/C++
+
+SparkFun Arduino BNO08x library [https://github.com/sparkfun/SparkFun_BNO08x_Arduino_Library](https://github.com/sparkfun/SparkFun_BNO08x_Arduino_Library)
+ - Written in C/C++
+
+Adafruit CircuitPython BNO085 library [https://github.com/adafruit/Adafruit_CircuitPython_BNO08x](https://github.com/adafruit/Adafruit_CircuitPython_BNO08x)
+ - Written in Python
+ 
 ## Writing a new driver
 
- - Port from existing work (Arduino driver in this case)
+ - Port from existing work ([Arduino driver](https://github.com/adafruit/Adafruit_BNO08x) in this case)
  - Read the specs / datasheets!
  - Drink coffee
  - Re-read the specs / datasheets
